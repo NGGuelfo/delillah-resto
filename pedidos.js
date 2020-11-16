@@ -3,7 +3,7 @@ const sequelize = new Sequelize("delillah", "root", "", {
     host: "127.0.0.1",
     dialect: "mysql",
 });
-const { Orders, Order_Detail, Payment, Status } = require("./models");
+const { Orders, Order_Detail} = require("./models");
 
 async function nuevoPedido(req, res) {
 

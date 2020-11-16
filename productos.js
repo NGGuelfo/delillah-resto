@@ -96,7 +96,7 @@ async function modificarProducto(req, res) {
     }
  };
 
-async function elminarProdcuto(req, res) {
+async function eliminarProducto(req, res) {
 
     const idProd = req.params.id;
 
@@ -126,5 +126,5 @@ module.exports = {
     misProductos,
     detalleProducto,
     modificarProducto,
-    elminarProdcuto
+    eliminarProducto
 }
