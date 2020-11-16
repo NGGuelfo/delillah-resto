@@ -36,11 +36,65 @@ async function nuevoProducto(req, res) {
         });
 };
 
-async function misProductos(req, res) { };
+async function misProductos(req, res) {
+    await Products.findAll()
+    .then(result => {
+        if(JSON.stringify(result) != "[]"){
+            res.status(200).json({productos: result});
+        } else{
+            res.status(404).send("No hay productos cargados en el sistema");
+        }
+    })
+    .catch(err => {
+        res.status(400).send("Ha habido un error en la consulta. Intente nuevamente mas tarde");
+    });
+ };
 
-async function productoPorId(req, res) { };
+async function detalleProducto(req, res) { 
+    const idProd = req.params.id;
 
-async function modificarProducto(req, res) { };
+    await Products.findByPk(idProd)
+    .then(result => {
+        if(result != null){
+            res.status(200).json({producto: result});
+        } else {
+            res.status(404).send("El producto no existe o es incorrecto. Vuelva a intentarlo");
+         }
+    })
+    .catch(err => {
+        res.status(400).send("Ha habido un error en la consulta. Intentelo mas tarde", err);
+    });
+};
+
+async function modificarProducto(req, res) {
+    const idProd = req.params.id;
+
+    let productosTraidos = await Products.findAll({
+        where: {
+            id: idProd
+        }
+    });
+    if (productosTraidos.length < 1) {
+        return res.status(404).send("No existe ningun pedido");
+    } else {
+        await Products.update({
+            prod_name: req.body.prodname,
+            prod_price: req.body.prodprice,
+            prod_img: req.body.prodimg,
+            prod_isFav: req.body.prodfav
+        }, {
+            where: {
+                id: idProd
+            }
+        })
+            .then(result => {
+                return res.status(200).json({ msg: "Producto actualizado correctamente" })
+            })
+            .catch(err => {
+                return res.status(400).send("Error en la actualizacion, intente mas tarde", err);
+            });
+    }
+ };
 
 async function elminarProdcuto(req, res) {
 
@@ -70,7 +124,7 @@ async function elminarProdcuto(req, res) {
 module.exports = {
     nuevoProducto,
     misProductos,
-    productoPorId,
+    detalleProducto,
     modificarProducto,
     elminarProdcuto
 }
