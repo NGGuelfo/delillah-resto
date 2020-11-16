@@ -1,16 +1,16 @@
-const {Sequelize, DataTypes} = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = new Sequelize("delillah", "root", "", {
     host: "127.0.0.1",
     dialect: "mysql",
 });
 
-async function connect(){
+async function connect() {
 
-    try{
+    try {
         await sequelize.authenticate();
         console.log("Conexion con base de datos exitosa");
     }
-    catch(error){
+    catch (error) {
         console.error("La base de datos no se encuentra disponible en este momento, intente mas tarde", error);
     }
 }
@@ -21,89 +21,89 @@ sequelize.sync({ force: false })
     .then(() => { console.log("Tablas sincronizadas"); })
     .catch((err) => { console.log("Ha ocurrido un error", err); });
 
-const Users = sequelize.define("users",{
+const Users = sequelize.define("users", {
 
 
-    id:{
+    id: {
         type: DataTypes.INTEGER(11),
         primaryKey: true,
         autoIncrement: true
     },
-    user:{
+    user: {
         type: DataTypes.STRING(255),
         allowNull: false
     },
-    password:{
+    password: {
         type: DataTypes.STRING(255),
         allowNull: false
     },
-    fullname:{
+    fullname: {
         type: DataTypes.STRING(255),
         allowNull: false
     },
-    email:{
+    email: {
         type: DataTypes.STRING(255),
         allowNull: false
     },
-    phone:{
+    phone: {
         type: DataTypes.INTEGER(20),
         allowNull: false
     },
-    address:{
+    address: {
         type: DataTypes.STRING(255),
         allowNull: false
     },
-    is_admin:{
+    is_admin: {
         type: DataTypes.INTEGER(1),
         allowNull: false
     }
 });
 
-const Products = sequelize.define("products",{
+const Products = sequelize.define("products", {
 
-    id:{
+    id: {
         type: DataTypes.INTEGER(11),
         autoIncrement: true,
         primaryKey: true
     },
-    prod_name:{
+    prod_name: {
         type: DataTypes.STRING(255),
         allowNull: false
     },
-    prod_price:{
+    prod_price: {
         type: DataTypes.INTEGER(4),
         allowNull: false
     },
-    prod_img:{
+    prod_img: {
         type: DataTypes.STRING(255),
         allowNull: true
     },
-    prod_isFav:{
+    prod_isFav: {
         type: DataTypes.STRING(1),
         allowNull: false
     },
 });
 
-const Orders = sequelize.define("orders",{
+const Orders = sequelize.define("orders", {
 
-    id:{
+    id: {
         type: DataTypes.INTEGER(11),
         autoIncrement: true,
         primaryKey: true
     },
-    order_date:{
+    order_date: {
         type: DataTypes.DATE,
         allowNull: false,
     },
-    status_id:{
+    status_id: {
         type: DataTypes.INTEGER(1),
         allowNull: false
     },
-    payment_id:{
+    payment_id: {
         type: DataTypes.INTEGER(1),
         allowNull: false
     },
-    user_id:{
+    user_id: {
         type: DataTypes.INTEGER(11),
         allowNull: false
     }
@@ -111,20 +111,20 @@ const Orders = sequelize.define("orders",{
 
 const Order_Detail = sequelize.define("order_detail", {
 
-    id:{
+    id: {
         type: DataTypes.INTEGER(11),
         autoIncrement: true,
         primaryKey: true
     },
-    order_id:{
+    order_id: {
         type: DataTypes.INTEGER(11),
         allowNull: false
     },
-    product_id:{
+    product_id: {
         type: DataTypes.INTEGER(11),
         allowNull: false
     },
-    product_quantity:{
+    product_quantity: {
         type: DataTypes.INTEGER(11),
         allowNull: false
     },
@@ -132,12 +132,12 @@ const Order_Detail = sequelize.define("order_detail", {
 
 const Payment = sequelize.define("payment", {
 
-    id:{
+    id: {
         type: DataTypes.INTEGER(1),
         autoIncrement: true,
         primaryKey: true
     },
-    payment_name:{
+    payment_name: {
         type: DataTypes.STRING(50),
         allowNull: false
     }
@@ -145,12 +145,12 @@ const Payment = sequelize.define("payment", {
 
 const Status = sequelize.define("status", {
 
-    id:{
+    id: {
         type: DataTypes.INTEGER(1),
         autoIncrement: true,
         primaryKey: true
     },
-    status_name:{
+    status_name: {
         type: DataTypes.STRING(50),
         allowNull: false
     }
