@@ -76,7 +76,7 @@ async function modificarProducto(req, res) {
     })
     .then(result => {
         if (JSON.stringify(result) == "[]") {
-            return res.status(404).send("No existe ningun pedido");
+            res.status(404).send("No existe ningun pedido");
         } else {
             Products.update({
                 prod_name: req.body.prodname,
@@ -89,10 +89,10 @@ async function modificarProducto(req, res) {
                 }
             })
                 .then(result => {
-                    return res.status(200).json({ msg: "Producto actualizado correctamente" })
+                   res.status(200).json({ msg: "Producto actualizado correctamente" })
                 })
                 .catch(err => {
-                    return res.status(400).send("Error en la actualizacion, intente mas tarde", err);
+                   res.status(400).send("Error en la actualizacion, intente mas tarde", err);
                 });
         }
     })
@@ -113,7 +113,7 @@ async function eliminarProducto(req, res) {
     })
     .then(result => {
         if (JSON.stringify(result) == "[]") {
-            return res.status(404).send("El producto buscado no existe");
+            res.status(404).send("El producto buscado no existe");
         } else {
             Products.destroy({
                 where: {
@@ -121,7 +121,7 @@ async function eliminarProducto(req, res) {
                 }
             })
                 .catch(err => {
-                    return res.status(400).send("Ha habido un error. Intente mas tarde", err);
+                    res.status(400).send("Ha habido un error. Intente mas tarde", err);
     
                 });
         }
