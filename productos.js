@@ -19,6 +19,7 @@ async function nuevoProducto(req, res) {
             } else {
                 Products.create({
                     prod_name: req.body.prodname,
+                    prod_detail: req.body.proddetail,
                     prod_price: req.body.prodprice,
                     prod_img: req.body.prodimg,
                     prod_isFav: 0
@@ -46,7 +47,7 @@ async function misProductos(req, res) {
         }
     })
     .catch(err => {
-        res.status(400).send("Ha habido un error en la consulta. Intente nuevamente mas tarde");
+        res.status(400).send("Ha habido un error en la consulta. Intente nuevamente mas tarde", err);
     });
  };
 
@@ -80,6 +81,7 @@ async function modificarProducto(req, res) {
         } else {
             Products.update({
                 prod_name: req.body.prodname,
+                prod_detail: req.body.proddetail,
                 prod_price: req.body.prodprice,
                 prod_img: req.body.prodimg,
                 prod_isFav: req.body.prodfav

@@ -70,6 +70,10 @@ const Products = sequelize.define("products", {
         type: DataTypes.STRING(255),
         allowNull: false
     },
+    prod_detail:{
+        type: DataTypes.STRING(255),
+        allowNull: false
+    },
     prod_price: {
         type: DataTypes.INTEGER(4),
         allowNull: false
@@ -79,7 +83,7 @@ const Products = sequelize.define("products", {
         allowNull: true
     },
     prod_isFav: {
-        type: DataTypes.STRING(1),
+        type: DataTypes.INTEGER(1),
         allowNull: false
     },
 });
