@@ -1,6 +1,7 @@
 const {nuevoProducto,misProductos,detalleProducto,modificarProducto,eliminarProducto} = require("./productos");
 const {nuevoPedido,detallePedido,consultaPedidos,modificarPedido,eliminarPedido} = require("./pedidos");
 const {checkAdmin, validarUsuario} = require ("./middlewares");
+const {login, misUsuarios, modificarUsuario, eliminarUsuario, crearUsuario} = require("./usuarios");
 const express = require('express');
 const bp = require('body-parser');
 const helmet = require('helmet');
@@ -16,11 +17,11 @@ app.listen(3000, function () {
 });
 
 //Endpoints Usuario
-app.post('/user');
-app.post('/user/login');
-app.get('/user', checkAdmin);
-app.put('/user', validarUsuario);
-app.delete('/user/:id', checkAdmin);
+app.post('/user', crearUsuario);
+app.post('/user/login', login);
+app.get('/user', checkAdmin, misUsuarios);
+app.put('/user', validarUsuario, modificarUsuario);
+app.delete('/user/:id', checkAdmin, eliminarUsuario);
 
 //Endpoints Productos
 app.post('/products', checkAdmin, nuevoProducto);
