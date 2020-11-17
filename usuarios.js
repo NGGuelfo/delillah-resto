@@ -115,7 +115,32 @@ async function modificarUsuario(req, res) {
         });
 };
 
-async function eliminarUsuario(req, res) { };
+async function eliminarUsuario(req, res) {
+    const idUser = req.params.id;
+
+    await Users.findAll({
+        where: {
+            id: idUser
+        }
+    })
+        .then(result => {
+            if(JSON.stringify(result) != "[]"){
+                await Users.destroy({
+                    where: {
+                        id: idUser
+                    }
+                })
+                .catch(err => {
+                    res.status(400).send("Error al eliminar el usuario", err);
+                });
+            } else {
+                res.status(400).send("El usuario no existe o ya ha sido eliminado");
+            }
+        })
+        .catch(err => {
+            res.status(400).send("error en la consulta. Intente nuevamente mas tarde");
+        });
+ };
 
 module.exports = {
     crearUsuario,
