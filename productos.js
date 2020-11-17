@@ -100,24 +100,31 @@ async function eliminarProducto(req, res) {
 
     const idProd = req.params.id;
 
-    let productosTraidos = await Products.findAll({
+   await Products.findAll({
         where: {
             id: idProd
         }
+    })
+    .then(result => {
+        if (JSON.stringify(result) == "[]") {
+            return res.status(404).send("El producto buscado no existe");
+        } else {
+            await Products.destroy({
+                where: {
+                    id: idProd
+                }
+            })
+                .catch(err => {
+                    return res.status(400).send("Ha habido un error. Intente mas tarde", err);
+    
+                });
+        }
+    })
+    .catch(err => {
+        res.status(400).send("Error en la consulta, intente nuevamente mas tarde", err);
     });
-    if (productosTraidos.length < 1) {
-        return res.status(404).send("El producto buscado no existe");
-    } else {
-        await Products.destroy({
-            where: {
-                id: idProd
-            }
-        })
-            .catch(err => {
-                return res.status(400).send("Ha habido un error. Intente mas tarde", err);
 
-            });
-    }
+    
 };
 
 
