@@ -18,7 +18,7 @@ async function crearUsuario(req, res) {
     })
         .then(result => {
             if (JSON.stringify(result) == "[]") {
-                await Users.create({
+                 Users.create({
                     user: req.body.username,
                     password: req.body.password,
                     fullname: req.body.fullname,
@@ -92,7 +92,7 @@ async function modificarUsuario(req, res) {
     })
         .then(result => {
             if (JSON.stringify(result) != "[]") {
-                await Users.update({
+                Users.update({
                     user: req.body.user,
                     password: req.body.password,
                     fullname: req.body.fullname,
@@ -125,7 +125,7 @@ async function eliminarUsuario(req, res) {
     })
         .then(result => {
             if(JSON.stringify(result) != "[]"){
-                await Users.destroy({
+                Users.destroy({
                     where: {
                         id: idUser
                     }

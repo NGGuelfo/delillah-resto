@@ -17,7 +17,7 @@ async function nuevoProducto(req, res) {
             if (JSON.stringify(data) !== '[]') {
                 res.status(400).send("el producto ingresado ya existe, intente con otro");
             } else {
-                await Products.create({
+                Products.create({
                     prod_name: req.body.prodname,
                     prod_price: req.body.prodprice,
                     prod_img: req.body.prodimg,
@@ -69,31 +69,37 @@ async function detalleProducto(req, res) {
 async function modificarProducto(req, res) {
     const idProd = req.params.id;
 
-    let productosTraidos = await Products.findAll({
+    await Products.findAll({
         where: {
             id: idProd
         }
-    });
-    if (productosTraidos.length < 1) {
-        return res.status(404).send("No existe ningun pedido");
-    } else {
-        await Products.update({
-            prod_name: req.body.prodname,
-            prod_price: req.body.prodprice,
-            prod_img: req.body.prodimg,
-            prod_isFav: req.body.prodfav
-        }, {
-            where: {
-                id: idProd
-            }
-        })
-            .then(result => {
-                return res.status(200).json({ msg: "Producto actualizado correctamente" })
+    })
+    .then(result => {
+        if (JSON.stringify(result) == "[]") {
+            return res.status(404).send("No existe ningun pedido");
+        } else {
+            Products.update({
+                prod_name: req.body.prodname,
+                prod_price: req.body.prodprice,
+                prod_img: req.body.prodimg,
+                prod_isFav: req.body.prodfav
+            }, {
+                where: {
+                    id: idProd
+                }
             })
-            .catch(err => {
-                return res.status(400).send("Error en la actualizacion, intente mas tarde", err);
-            });
-    }
+                .then(result => {
+                    return res.status(200).json({ msg: "Producto actualizado correctamente" })
+                })
+                .catch(err => {
+                    return res.status(400).send("Error en la actualizacion, intente mas tarde", err);
+                });
+        }
+    })
+    .catch(err => {
+        res.status(400).send("Ha habido un error en la consulta. intente nuevamente mas tarde", err);
+    });
+    
  };
 
 async function eliminarProducto(req, res) {
@@ -109,7 +115,7 @@ async function eliminarProducto(req, res) {
         if (JSON.stringify(result) == "[]") {
             return res.status(404).send("El producto buscado no existe");
         } else {
-            await Products.destroy({
+            Products.destroy({
                 where: {
                     id: idProd
                 }

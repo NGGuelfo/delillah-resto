@@ -7,7 +7,6 @@ const { Orders, Order_Detail} = require("./models");
 
 async function nuevoPedido(req, res) {
 
-    let pedido;
     let userId = req.user.existe[0].id;
     await Orders.create({
 
