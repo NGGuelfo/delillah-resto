@@ -11,7 +11,7 @@ async function crearUsuario(req, res) {
     await Users.findAll({
         where: {
             [Op.or]: [
-                { user: req.body.username },
+                { user: req.body.user },
                 { email: req.body.email }
             ]
         }
@@ -19,7 +19,7 @@ async function crearUsuario(req, res) {
         .then(result => {
             if (JSON.stringify(result) == "[]") {
                  Users.create({
-                    user: req.body.username,
+                    user: req.body.user,
                     password: req.body.password,
                     fullname: req.body.fullname,
                     email: req.body.email,
@@ -43,11 +43,13 @@ async function crearUsuario(req, res) {
 };
 
 async function login(req, res) {
+    const user = req.body.user;
+    console.log(user);
     await Users.findAll({
         where: {
             [Op.or]: [
-                { user: req.body.username },
-                { email: req.body.email }
+                { user: user },
+                { email: user }
             ]
         }
     })
@@ -63,7 +65,8 @@ async function login(req, res) {
             }
         })
         .catch(err => {
-            res.status(400).send("Error en la consulta. Intente nuevamente mas tarde", err);
+            console.log(err);
+            res.status(400).send("Error en la consulta. Intente nuevamente mas tarde");
         });
 };
 
@@ -78,7 +81,7 @@ async function misUsuarios(req, res) {
             }
         })
         .catch(err => {
-            res.status(400).send("Ha habido un error en la consulta. Intentelo nuevamente", err);
+            res.status(400).send("Ha habido un error en la consulta. Intentelo nuevamente");
         });
 };
 
@@ -104,14 +107,14 @@ async function modificarUsuario(req, res) {
                         res.status(200).json({ msg: "El usuario ha sido actualizado" });
                     })
                     .catch(err => {
-                        res.status(400).send("Error en la actualizacion de usuario", err);
+                        res.status(400).send("Error en la actualizacion de usuario");
                     });
             } else {
-                res.status(404).send("El usuario buscado no existe, intente nuevamente", err);
+                res.status(404).send("El usuario buscado no existe, intente nuevamente");
             }
         })
         .catch(err => {
-            res.status(400).send("Error en la consulta. Intente nuevamente mas tarde", err);
+            res.status(400).send("Error en la consulta. Intente nuevamente mas tarde");
         });
 };
 
@@ -132,14 +135,14 @@ async function eliminarUsuario(req, res) {
                 })
                 .then(result => res.status(200).json({msg: "Usuario eliminado"}))
                 .catch(err => {
-                    res.status(400).send("Error al eliminar el usuario", err);
+                    res.status(400).send("Error al eliminar el usuario");
                 });
             } else {
                 res.status(404).send("El usuario no existe o ya ha sido eliminado");
             }
         })
         .catch(err => {
-            res.status(400).send("error en la consulta. Intente nuevamente mas tarde", err);
+            res.status(400).send("error en la consulta. Intente nuevamente mas tarde");
         });
  };
 

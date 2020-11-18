@@ -5,11 +5,9 @@ const {login, misUsuarios, modificarUsuario, eliminarUsuario, crearUsuario} = re
 const express = require('express');
 const bp = require('body-parser');
 const helmet = require('helmet');
-
 const app = express();
-bp.json();
 
-app.use(bp);
+app.use(bp.json());
 app.use(helmet());
 app.listen(3000, function () {
 

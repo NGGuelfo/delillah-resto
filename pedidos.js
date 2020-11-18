@@ -56,12 +56,12 @@ async function detallePedido(req, res) {
                         res.status(200).json(data);
                     })
                     .catch(err => {
-                        res.status(400).send("Error al realizar la consulta, intente nuevamente", err);
+                        res.status(400).send("Error al realizar la consulta, intente nuevamente");
                     })
             }
         })
         .catch(err => {
-            res.status(400).send("Error en la consulta. Intente nuevamente", err);
+            res.status(400).send("Error en la consulta. Intente nuevamente");
         })
 };
 
@@ -98,12 +98,12 @@ async function consultaPedidos(req, res) {
                         res.status(200).json(data);
                     })
                     .catch(err => {
-                        res.status(400).send("Error al realizar la consulta, intente nuevamente", err);
+                        res.status(400).send("Error al realizar la consulta, intente nuevamente");
                     });
             }
         })
         .catch(err => {
-            res.status(400).send("Error en la consulta. Intentelo nuevamente mas tarde", err);
+            res.status(400).send("Error en la consulta. Intentelo nuevamente mas tarde");
         });
 
 };
@@ -131,12 +131,12 @@ async function modificarPedido(req, res) {
                         res.status(200).json({ msg: "Estado actualizado correctamente" })
                     })
                     .catch(err => {
-                        res.status(400).send("Error en la actualizacion, intente mas tarde", err);
+                        res.status(400).send("Error en la actualizacion, intente mas tarde");
                     });
             }
         })
         .catch(err => {
-            res.status(400).send("Ha habido un error en la consulta. intente nuevamente mas tarde", err);
+            res.status(400).send("Ha habido un error en la consulta. intente nuevamente mas tarde");
         });
 
 };
@@ -159,7 +159,7 @@ async function eliminarPedido(req, res) {
                     }
                 })
                     .catch(err => {
-                        res.status(400).send("Ha habido un error. Intente mas tarde", err);
+                        res.status(400).send("Ha habido un error. Intente mas tarde");
 
                     });
                 Order_Detail.destroy({
@@ -171,12 +171,12 @@ async function eliminarPedido(req, res) {
                         res.status(200).json({ msg: "Pedido eliminado correctamente" });
                     })
                     .catch(err => {
-                        res.status(400).send("Ha habido un error. Intente mas tarde", err);
+                        res.status(400).send("Ha habido un error. Intente mas tarde");
                     });
             }
         })
         .catch(err => {
-            res.status(400).send("Ha habido un error en la consulta. intente nuevamente mas tarde", err);
+            res.status(400).send("Ha habido un error en la consulta. intente nuevamente mas tarde");
         });
 
 };

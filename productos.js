@@ -28,12 +28,12 @@ async function nuevoProducto(req, res) {
                         res.status(201).json({ msg: "El producto fue creado correctamente" });
                     })
                     .catch(err => {
-                        res.status(400).send("Hubo un error en la creacion del producto. Intente mas tarde", err);
+                        res.status(400).send("Hubo un error en la creacion del producto. Intente mas tarde");
                     });
             }
         })
         .catch(err => {
-            res.status(400).send("Ha habido un error en su consulta, intente nuevamente mas tarde", err);
+            res.status(400).send("Ha habido un error en su consulta, intente nuevamente mas tarde");
         });
 };
 
@@ -47,7 +47,7 @@ async function misProductos(req, res) {
         }
     })
     .catch(err => {
-        res.status(400).send("Ha habido un error en la consulta. Intente nuevamente mas tarde", err);
+        res.status(400).send("Ha habido un error en la consulta. Intente nuevamente mas tarde");
     });
  };
 
@@ -63,7 +63,7 @@ async function detalleProducto(req, res) {
          }
     })
     .catch(err => {
-        res.status(400).send("Ha habido un error en la consulta. Intentelo mas tarde", err);
+        res.status(400).send("Ha habido un error en la consulta. Intentelo mas tarde");
     });
 };
 
@@ -94,12 +94,12 @@ async function modificarProducto(req, res) {
                    res.status(200).json({ msg: "Producto actualizado correctamente" })
                 })
                 .catch(err => {
-                   res.status(400).send("Error en la actualizacion, intente mas tarde", err);
+                   res.status(400).send("Error en la actualizacion, intente mas tarde");
                 });
         }
     })
     .catch(err => {
-        res.status(400).send("Ha habido un error en la consulta. intente nuevamente mas tarde", err);
+        res.status(400).send("Ha habido un error en la consulta. intente nuevamente mas tarde");
     });
     
  };
@@ -126,13 +126,13 @@ async function eliminarProducto(req, res) {
                 res.status(200).json({msg: "producto eliminado"});
             })
                 .catch(err => {
-                    res.status(400).send("Ha habido un error. Intente mas tarde", err);
+                    res.status(400).send("Ha habido un error. Intente mas tarde");
     
                 });
         }
     })
     .catch(err => {
-        res.status(400).send("Error en la consulta, intente nuevamente mas tarde", err);
+        res.status(400).send("Error en la consulta, intente nuevamente mas tarde");
     });
 
     
