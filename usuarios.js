@@ -96,17 +96,23 @@ async function modificarUsuario(req, res) {
         .then(result => {
             if (JSON.stringify(result) != "[]") {
                 Users.update({
+                    
                     user: req.body.user,
                     password: req.body.password,
                     fullname: req.body.fullname,
                     email: req.body.email,
                     phone: req.body.phone,
                     address: req.body.address,
+                },{
+                    where:{
+                        id: idUser
+                    }
                 })
                     .then(data => {
                         res.status(200).json({ msg: "El usuario ha sido actualizado" });
                     })
                     .catch(err => {
+                        console.log(err);
                         res.status(400).send("Error en la actualizacion de usuario");
                     });
             } else {
