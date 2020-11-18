@@ -18,7 +18,7 @@ app.listen(3000, function () {
 app.post('/user', crearUsuario);
 app.post('/user/login', login);
 app.get('/user', checkAdmin, misUsuarios);
-app.put('/user', validarUsuario, modificarUsuario);
+app.put('/user/:id', validarUsuario, modificarUsuario);
 app.delete('/user/:id', checkAdmin, eliminarUsuario);
 
 //Endpoints Productos
