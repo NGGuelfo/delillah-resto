@@ -1,0 +1,503 @@
+openapi: 3.0.0
+servers: 
+  - description: ServidorLocal
+    url: http://127.0.0.1:3000
+  
+info:
+  title: Delillah Resto
+  version: 1.0.0
+  description: API para delivery de comida online. Se puede registrar y realizar pedidos como usuario. El Administrador se encarga del control de los pedidos asi como la carga y actualizacion de productos.
+
+tags:
+- name: products
+  description: Todo sobre productos
+- name: orders
+  description: Todo sobre pedidos
+- name: users
+  description: Todo sobre usuarios
+
+paths:
+  /products:
+    get:
+      tags:
+      - products
+      summary: Visualizacion de todos los productos
+      operationId: misProductos
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:  
+                  $ref: '#/components/schemas/Products'
+        '400':
+          description: Ha habido un error en la consulta. Intente nuevamente mas tarde
+        '404':
+          description: No hay productos cargados en el sistema  
+    post:
+      tags:
+      - products
+      summary: Agregar un nuevo producto en el sistema
+      operationId: nuevoProducto
+      requestBody:
+        required: true
+        content:
+          multipart/mixed:
+            schema:
+              $ref: '#/components/schemas/Products'
+            encoding:
+              imagen:
+                contentType: image/png, image/jpeg
+      responses:
+        '200':
+          description: El producto fue creado correctamente
+        '400':
+          description: Hubo un error en la creacion del producto. Intente mas tarde
+        '400':
+          description: Ha habido un error en su consulta, intente nuevamente mas tarde
+        '400':
+          description: El producto ingresado ya existe, intente con otro
+  /products/{id}:
+    get:
+      tags:
+      - products
+      summary: Visualizar el detalle de un producto por id
+      operationId: detalleProducto
+      parameters: 
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: ID de producto a visualizar
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Products'
+        '400':
+          description: Ha habido un error en la consulta. Intentelo mas tarde
+        '404':
+          description: El producto no existe o es incorrecto. Vuelva a intentarlo
+    put:
+      tags:
+      - products
+      summary: Modificar la informacion de un producto buscado por id
+      operationId: modificarProducto
+      parameters: 
+      - in: path
+        name: id
+        required: true
+        content:
+          multipart/mixed:
+            schema:
+              $ref: '#/components/schemas/Products'
+            encoding:
+              imagen:
+                contentType: image/png, image/jpeg
+      responses:
+        '200':
+          description: Producto actualizado correctamente
+        '400':
+          description: Error en la actualizacion, intente mas tarde
+        '400':
+          description: Ha habido un error en la consulta. intente nuevamente mas tarde
+        '404':
+          description: No existe ningun producto
+    delete:
+      tags:
+      - products
+      summary: Permite eliminar un producto del sistema. Se pasa id para identificarlo
+      operationId: eliminarProducto
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: object
+          properties:
+            id_producto:
+              type: integer
+        required: true
+      responses:
+        '200':
+          description: producto eliminado
+        '400':
+          description: Ha habido un error. Intente mas tarde
+        '400':
+          description: Error en la consulta, intente nuevamente mas tarde
+        '404':
+          description: El producto buscado no existe
+  /user:
+    get:
+      tags:
+      - users
+      summary: Visualizar todos los usuarios registrados
+      operationId: misUsuarios
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:  
+                  $ref: '#/components/schemas/Users'
+        '400':
+          description: Ha habido un error en la consulta. Intentelo nuevamente
+        '404':
+          description: No hay usuarios cargados en el sistema
+    post:
+      tags:
+      - users
+      summary: Registrar un nuevo usuario en el sistema
+      operationId: crearUsuario
+      requestBody:
+        required: true
+        content:
+          application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
+      responses:
+        '201':
+          description: el usuario ha sido creado
+        '400':
+          description: Ha habido un error. Intente nuevamente mas tarde
+        '400':
+          description: El usuario ya existe
+        '400':
+          description: Ha habido un error en la consulta. intente nuevamente mas tarde
+    put:
+      tags:
+      - users
+      summary: modificacion del usuario
+      operationId: modificarUsuario
+      responses:
+        '200':
+          description: El usuario ha sido actualizado
+        '400':
+          description: Error en la actualizacion de usuario
+        '400':
+          description: Error en la consulta. Intente nuevamente mas tarde
+        '404':
+          description: El usuario buscado no existe, intente nuevamente
+  /user/login:
+    post:
+      tags:
+      - users
+      summary: Ingreso del usuario a la plataforma
+      operationId: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+              schema:
+                $ref: '#/components/schemas/Login'
+      responses:
+        "200":
+          description: ingreso al sistema. No devuelve mensaje
+        "400":
+          description: La contraseña ingresada no es correcta, intente nuevamente
+        "400":
+          description: Error en la consulta. Intente nuevamente mas tarde
+        "404":
+          description: El usuario ingresado no existe
+  /user/{id}:
+    delete:
+      tags:
+      - users
+      summary: Eliminar un usuario del sistema
+      operationId: eliminarUsuario
+      parameters: 
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: ID de usuario a eliminar
+        required: true
+      responses:
+        '200':
+          description: Usuario eliminado
+        '400':
+          description: Error al eliminar el usuario
+        '400':
+          description: error en la consulta. Intente nuevamente mas tarde
+        '404':
+          description: El usuario no existe o ya ha sido eliminado
+  /order:
+    get:
+      tags:
+      - orders
+      summary: Ver listado de pedidos realizados por los usuarios
+      operationId: consultaPedidos
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Order'
+        '400':
+          description: Error al realizar la consulta, intente nuevamente
+        '400':
+          description: Error en la consulta. Intentelo nuevamente mas tarde
+        '404':
+          description: No existe ningun pedido en el sistema
+    post:
+      tags:
+      - orders
+      summary: Generar nuevo pedido en el sistema
+      operationId: nuevoPedido
+      requestBody:
+        required: true
+        content:
+          application/json:
+              schema:
+                $ref: '#/components/schemas/newOrder'
+      responses:
+        '200':
+          description: Orden creada correctamente
+        '400':
+          description: Error en la carga del pedido, intente en otro momento       
+  /order/{id}:
+    get:
+      tags:
+      - orders
+      summary: Visualizar un pedido especifico
+      operationId: detallePedido
+      parameters: 
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Id de orden buscada
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '400':
+          description: Error al realizar la consulta, intente nuevamente
+        '400':
+          description: Error en la consulta. Intente nuevamente
+        '404':
+          description: No existe ningun pedido en el sistema
+    put:
+      tags:
+      - orders
+      summary: Modificar el estado actual del pedido
+      operationId: modificarPedido
+      parameters: 
+      - in: path
+        name: id
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderStatus'
+      responses:
+        '200':
+          description: Estado actualizado correctamente
+        '400':
+          description: Error en la actualizacion, intente mas tarde
+        '400':
+          description: Ha habido un error en la consulta. intente nuevamente mas tarde
+        '404':
+          description: No existe ningun pedido
+    delete:
+      tags:
+      - orders
+      summary: Borrar un pedido del sistema
+      operationId: eliminarPedido
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: object
+          properties:
+            id_pedido:
+              type: integer
+        required: true
+      responses:
+        '200':
+          description: Pedido eliminado correctamente
+        '400':
+          description: Ha habido un error. Intente mas tarde
+        '400':
+          description: Ha habido un error en la consulta. intente nuevamente mas tarde
+        '404':
+          description: No existe ningun pedido
+  
+components:
+  schemas:
+    Products:
+      type: object
+      properties:
+        name: 
+          type: string
+          description: Nombre del producto
+          example: 'Hamburguesa casera'
+        price:
+          type: integer
+          description: Precio del producto
+          example: 1000
+        detail:
+          type: string
+          description: Descripción del producto
+          example: 'Hamburguesa casera con queso'
+        imagen:
+          type: string
+          format: binary
+    Users:
+      type: object
+      properties:
+        user: 
+          type: string
+          description: nombre de usuario
+          example: 'NGuelfo'
+        fullname: 
+          type: string
+          description: Nombre y apellido del usuario
+          example: 'Nicolas Guelfo'
+        email: 
+          type: string
+          description: Mail del usuario
+          example: 'nguelfo@delillah.com'
+        phone:
+          type: integer
+          description: Numero telefonico del usuario
+          example: 4585 6985
+        address:
+          type: string
+          description: Dirección del usuario
+          example: 'Nazca 4758'
+        password:
+          type: string
+          description: Contraseña del usuario
+          example: 'delillah2020'
+      required:
+        - user
+        - fullname
+        - email
+        - phone
+        - address
+        - password
+    Login:
+      type: object
+      properties:
+        user: 
+          type: string
+          description: Usuario o email del cliente
+          example: 'NGuelfo'
+        password:
+          type: string
+          description: Contraseña del usuario
+          example: 'delillah2020'
+      required:
+        - user o email
+        - password
+    Order:
+      type: object
+      properties:
+        products: 
+          type: array
+          description: Lista de productos pedidos
+          items:
+            properties:
+              id: 
+                type: integer
+                description: Id del producto
+                example: 1
+              product_quantity: 
+                type: integer
+                description: cantidad del producto pedido
+                example: 2
+              product_price: 
+                type: number
+                description: precio del producto pedido
+                example: 330
+        final_price: 
+          type: number
+          description: Suma total del precio de los productos encargados y sus cantidades
+          example: 1550
+        payment:
+          type: string
+          enum:
+            - Efectivo
+            - Tarjeta de credito/debito
+          default: Efectivo
+        status:
+          type: string
+          enum:
+            - Nuevo
+            - Confirmado
+            - En Preparacion
+            - Enviado
+            - Cancelado
+            - Entregado
+          default: Nuevo
+        Date:
+          type: string
+          description: fecha y hora del pedido
+          example: '17/11/2020 12:25'
+        user_id:
+          type: integer
+          description: id del cliente
+          example: 33
+      required:
+        - products
+        - final_price
+        - payment
+        - status
+        - Date
+        - user_id
+    newOrder:
+      type: object
+      properties:
+        products: 
+          type: array
+          description: Array de productos encargados
+          items:
+            properties:
+              id: 
+                type: integer
+                description: id del producto
+                example: 1
+              quantity: 
+                type: integer
+                description: cantidad del producto pedido
+                example: 2
+        payment:
+          type: string
+          enum:
+            - Efectivo
+            - Tarjeta de credito/debito
+          default: Efectivo
+      required:
+        - products
+        - payment
+    OrderStatus:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id del pedido
+          example: 1
+        status:
+          type: string
+          enum:
+            - Nuevo
+            - Confirmado
+            - En Preparacion
+            - Enviado
+            - Cancelado
+            - Entregado
+      required:
+        - id
+        - status
+
+externalDocs:
+  url: https://github.com/NGGuelfo/delillah-resto

@@ -77,7 +77,7 @@ async function modificarProducto(req, res) {
     })
     .then(result => {
         if (JSON.stringify(result) == "[]") {
-            res.status(404).send("No existe ningun pedido");
+            res.status(404).send("No existe ningun producto");
         } else {
             Products.update({
                 prod_name: req.body.prodname,
@@ -121,6 +121,9 @@ async function eliminarProducto(req, res) {
                 where: {
                     id: idProd
                 }
+            })
+            .then(result => {
+                res.status(200).json({msg: "producto eliminado"});
             })
                 .catch(err => {
                     res.status(400).send("Ha habido un error. Intente mas tarde", err);

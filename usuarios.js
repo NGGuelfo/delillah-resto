@@ -53,7 +53,7 @@ async function login(req, res) {
     })
         .then(result => {
             if (JSON.stringify(result) == "[]") {
-                res.status(400).send("El usuario ingresado no existe");
+                res.status(404).send("El usuario ingresado no existe");
             } else if (result[0].password !== req.body.password) {
                 res.status(400).send("La contraseña ingresada no es correcta, intente nuevamente");
             } else {
@@ -130,15 +130,16 @@ async function eliminarUsuario(req, res) {
                         id: idUser
                     }
                 })
+                .then(result => res.status(200).json({msg: "Usuario eliminado"}))
                 .catch(err => {
                     res.status(400).send("Error al eliminar el usuario", err);
                 });
             } else {
-                res.status(400).send("El usuario no existe o ya ha sido eliminado");
+                res.status(404).send("El usuario no existe o ya ha sido eliminado");
             }
         })
         .catch(err => {
-            res.status(400).send("error en la consulta. Intente nuevamente mas tarde");
+            res.status(400).send("error en la consulta. Intente nuevamente mas tarde", err);
         });
  };
 
