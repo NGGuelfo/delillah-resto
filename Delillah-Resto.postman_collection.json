@@ -1,0 +1,590 @@
+{
+	"info": {
+		"_postman_id": "6ebb17c5-8db6-4a03-a5aa-cd5bb4dab744",
+		"name": "Delillah-Resto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Pruebas usuarios",
+			"item": [
+				{
+					"name": "Prueba buscar usuarios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VyIjoiQWRtaW4iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImZ1bGxuYW1lIjoiQWRtaW4iLCJlbWFpbCI6ImVqZW1wbG9AYWRtaW4uY29tIiwicGhvbmUiOjQ1MjEzNTY4LCJhZGRyZXNzIjoiQWRtaW4iLCJpc19hZG1pbiI6MSwiY3JlYXRlZEF0IjpudWxsLCJ1cGRhdGVkQXQiOm51bGx9LCJpYXQiOjE2MDU3Mzk3OTN9.S3JXwZknmI_24aw6K5bGgi2byE8XDK-I8aCLGom-tHE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:3000/user",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": \"Admin\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:3000/user/login",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": \"NEndoRuiz\",\r\n    \"password\": \"12345678\",\r\n    \"fullname\": \"Nicol Endo Ruiz\",\r\n    \"email\": \"nendo@delillah.com\",\r\n    \"phone\": \"45213659\",\r\n    \"address\": \"Nazca 1546\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/user",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": \"NGuelfo\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/user/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modificar usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJ1c2VyIjoiTkd1ZWxmbyIsInBhc3N3b3JkIjoiMTIzNDU2NzgiLCJmdWxsbmFtZSI6Ik5pY29sYXMgR3VlbGZvIiwiZW1haWwiOiJuZ3VlbGZvQGRlbGlsbGFoLmNvbSIsInBob25lIjo0ODU2OTg0NSwiYWRkcmVzcyI6Ik5hemNhIDQ1ODkiLCJpc19hZG1pbiI6MCwiY3JlYXRlZEF0IjpudWxsLCJ1cGRhdGVkQXQiOm51bGx9LCJpYXQiOjE2MDU3NDA3NDV9.yKRSfS7FVzUf8S3p7RKNhTe-MnMO9eaD1uAKe02vDdE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": \"NGuelfo\",\r\n    \"password\": \"987654321\",\r\n    \"fullname\": \"Nicolas Giancarlo Guelfo\",\r\n    \"email\": \"nguelfo@delillah.com\",\r\n    \"phone\": \"48569845\",\r\n    \"address\": \"Nazca 1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/user/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VyIjoiQWRtaW4iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImZ1bGxuYW1lIjoiQWRtaW4iLCJlbWFpbCI6ImVqZW1wbG9AYWRtaW4uY29tIiwicGhvbmUiOjQ1MjEzNTY4LCJhZGRyZXNzIjoiQWRtaW4iLCJpc19hZG1pbiI6MSwiY3JlYXRlZEF0IjpudWxsLCJ1cGRhdGVkQXQiOm51bGx9LCJpYXQiOjE2MDU3NDE2Njl9.2HztW3gw669-Y2s41Da-IZ5tgpB5cpXiIhCELHa-we8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/user/4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Pruebas productos",
+			"item": [
+				{
+					"name": "buscar todos los productos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VyIjoiQWRtaW4iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImZ1bGxuYW1lIjoiQWRtaW4iLCJlbWFpbCI6ImVqZW1wbG9AYWRtaW4uY29tIiwicGhvbmUiOjQ1MjEzNTY4LCJhZGRyZXNzIjoiQWRtaW4iLCJpc19hZG1pbiI6MSwiY3JlYXRlZEF0IjpudWxsLCJ1cGRhdGVkQXQiOm51bGx9LCJpYXQiOjE2MDU3NDE2Njl9.2HztW3gw669-Y2s41Da-IZ5tgpB5cpXiIhCELHa-we8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/products",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Nuevo Producto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VyIjoiQWRtaW4iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImZ1bGxuYW1lIjoiQWRtaW4iLCJlbWFpbCI6ImVqZW1wbG9AYWRtaW4uY29tIiwicGhvbmUiOjQ1MjEzNTY4LCJhZGRyZXNzIjoiQWRtaW4iLCJpc19hZG1pbiI6MSwiY3JlYXRlZEF0IjpudWxsLCJ1cGRhdGVkQXQiOm51bGx9LCJpYXQiOjE2MDU3NDE2Njl9.2HztW3gw669-Y2s41Da-IZ5tgpB5cpXiIhCELHa-we8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"prod_name\": \"Ravioles con salsa\",\r\n    \"prod_detail\": \"Ravioles con salsa bolognesa\",\r\n    \"prod_price\": \"800\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/products",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ver detalle producto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJ1c2VyIjoiTkd1ZWxmbyIsInBhc3N3b3JkIjoiMTIzNDU2NzgiLCJmdWxsbmFtZSI6Ik5pY29sYXMgR3VlbGZvIiwiZW1haWwiOiJuZ3VlbGZvQGRlbGlsbGFoLmNvbSIsInBob25lIjo0ODU2OTg0NSwiYWRkcmVzcyI6Ik5hemNhIDQ1ODkiLCJpc19hZG1pbiI6MCwiY3JlYXRlZEF0IjpudWxsLCJ1cGRhdGVkQXQiOm51bGx9LCJpYXQiOjE2MDU3NDA3NDV9.yKRSfS7FVzUf8S3p7RKNhTe-MnMO9eaD1uAKe02vDdE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/products/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"products",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modificar producto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VyIjoiQWRtaW4iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImZ1bGxuYW1lIjoiQWRtaW4iLCJlbWFpbCI6ImVqZW1wbG9AYWRtaW4uY29tIiwicGhvbmUiOjQ1MjEzNTY4LCJhZGRyZXNzIjoiQWRtaW4iLCJpc19hZG1pbiI6MSwiY3JlYXRlZEF0IjpudWxsLCJ1cGRhdGVkQXQiOm51bGx9LCJpYXQiOjE2MDU3NDE2Njl9.2HztW3gw669-Y2s41Da-IZ5tgpB5cpXiIhCELHa-we8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"prod_name\": \"Hamburguesa Casera\",\r\n    \"prod_detail\": \"Hamburguesa completa con jamon, queso , lechuga y tomate\",\r\n    \"prod_price\": \"780\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/products/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"products",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar producto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VyIjoiQWRtaW4iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImZ1bGxuYW1lIjoiQWRtaW4iLCJlbWFpbCI6ImVqZW1wbG9AYWRtaW4uY29tIiwicGhvbmUiOjQ1MjEzNTY4LCJhZGRyZXNzIjoiQWRtaW4iLCJpc19hZG1pbiI6MSwiY3JlYXRlZEF0IjpudWxsLCJ1cGRhdGVkQXQiOm51bGx9LCJpYXQiOjE2MDU3NDE2Njl9.2HztW3gw669-Y2s41Da-IZ5tgpB5cpXiIhCELHa-we8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/products/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"products",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Pruebas Pedidos",
+			"item": [
+				{
+					"name": "crear pedido",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJ1c2VyIjoiTkd1ZWxmbyIsInBhc3N3b3JkIjoiMTIzNDU2NzgiLCJmdWxsbmFtZSI6Ik5pY29sYXMgR3VlbGZvIiwiZW1haWwiOiJuZ3VlbGZvQGRlbGlsbGFoLmNvbSIsInBob25lIjo0ODU2OTg0NSwiYWRkcmVzcyI6Ik5hemNhIDQ1ODkiLCJpc19hZG1pbiI6MCwiY3JlYXRlZEF0IjpudWxsLCJ1cGRhdGVkQXQiOm51bGx9LCJpYXQiOjE2MDU3NDA3NDV9.yKRSfS7FVzUf8S3p7RKNhTe-MnMO9eaD1uAKe02vDdE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"payment_id\": \"1\",\r\n    \"details\": [\r\n        {\r\n            \"product_id\": \"4\",\r\n            \"product_quantity\": \"1\"\r\n        },\r\n        {\r\n            \"product_id\": \"6\",\r\n            \"product_quantity\": \"2\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/order",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar pedidos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VyIjoiQWRtaW4iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImZ1bGxuYW1lIjoiQWRtaW4iLCJlbWFpbCI6ImVqZW1wbG9AYWRtaW4uY29tIiwicGhvbmUiOjQ1MjEzNTY4LCJhZGRyZXNzIjoiQWRtaW4iLCJpc19hZG1pbiI6MSwiY3JlYXRlZEF0IjpudWxsLCJ1cGRhdGVkQXQiOm51bGx9LCJpYXQiOjE2MDU3NDE2Njl9.2HztW3gw669-Y2s41Da-IZ5tgpB5cpXiIhCELHa-we8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/order",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar pedido por id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJ1c2VyIjoiTkd1ZWxmbyIsInBhc3N3b3JkIjoiMTIzNDU2NzgiLCJmdWxsbmFtZSI6Ik5pY29sYXMgR3VlbGZvIiwiZW1haWwiOiJuZ3VlbGZvQGRlbGlsbGFoLmNvbSIsInBob25lIjo0ODU2OTg0NSwiYWRkcmVzcyI6Ik5hemNhIDQ1ODkiLCJpc19hZG1pbiI6MCwiY3JlYXRlZEF0IjpudWxsLCJ1cGRhdGVkQXQiOm51bGx9LCJpYXQiOjE2MDU3NDA3NDV9.yKRSfS7FVzUf8S3p7RKNhTe-MnMO9eaD1uAKe02vDdE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/order/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"order",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modificar estado pedido",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VyIjoiQWRtaW4iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImZ1bGxuYW1lIjoiQWRtaW4iLCJlbWFpbCI6ImVqZW1wbG9AYWRtaW4uY29tIiwicGhvbmUiOjQ1MjEzNTY4LCJhZGRyZXNzIjoiQWRtaW4iLCJpc19hZG1pbiI6MSwiY3JlYXRlZEF0IjpudWxsLCJ1cGRhdGVkQXQiOm51bGx9LCJpYXQiOjE2MDU3NDE2Njl9.2HztW3gw669-Y2s41Da-IZ5tgpB5cpXiIhCELHa-we8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status_id\": \"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/order/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"order",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "borrar pedido",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VyIjoiQWRtaW4iLCJwYXNzd29yZCI6IjEyMzQ1NiIsImZ1bGxuYW1lIjoiQWRtaW4iLCJlbWFpbCI6ImVqZW1wbG9AYWRtaW4uY29tIiwicGhvbmUiOjQ1MjEzNTY4LCJhZGRyZXNzIjoiQWRtaW4iLCJpc19hZG1pbiI6MSwiY3JlYXRlZEF0IjpudWxsLCJ1cGRhdGVkQXQiOm51bGx9LCJpYXQiOjE2MDU3NDE2Njl9.2HztW3gw669-Y2s41Da-IZ5tgpB5cpXiIhCELHa-we8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/order/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"order",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
