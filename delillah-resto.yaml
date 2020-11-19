@@ -167,20 +167,6 @@ paths:
           description: El usuario ya existe
         '400':
           description: Ha habido un error en la consulta. intente nuevamente mas tarde
-    put:
-      tags:
-      - users
-      summary: modificacion del usuario
-      operationId: modificarUsuario
-      responses:
-        '200':
-          description: El usuario ha sido actualizado
-        '400':
-          description: Error en la actualizacion de usuario
-        '400':
-          description: Error en la consulta. Intente nuevamente mas tarde
-        '404':
-          description: El usuario buscado no existe, intente nuevamente
   /user/login:
     post:
       tags:
@@ -203,6 +189,20 @@ paths:
         "404":
           description: El usuario ingresado no existe
   /user/{id}:
+    put:
+      tags:
+      - users
+      summary: modificacion del usuario
+      operationId: modificarUsuario
+      responses:
+        '200':
+          description: El usuario ha sido actualizado
+        '400':
+          description: Error en la actualizacion de usuario
+        '400':
+          description: Error en la consulta. Intente nuevamente mas tarde
+        '404':
+          description: El usuario buscado no existe, intente nuevamente
     delete:
       tags:
       - users
