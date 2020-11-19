@@ -96,8 +96,7 @@ const Orders = sequelize.define("orders", {
         primaryKey: true
     },
     order_date: {
-        type: DataTypes.DATE,
-        allowNull: false,
+        type: DataTypes.DATE
     },
     status_id: {
         type: DataTypes.INTEGER(1),
@@ -113,7 +112,7 @@ const Orders = sequelize.define("orders", {
     }
 });
 
-const Order_Detail = sequelize.define("order_detail", {
+const Order_Detail = sequelize.define("order_details", {
 
     id: {
         type: DataTypes.INTEGER(11),
@@ -134,7 +133,7 @@ const Order_Detail = sequelize.define("order_detail", {
     },
 });
 
-const Payment = sequelize.define("payment", {
+const Payment = sequelize.define("payments", {
 
     id: {
         type: DataTypes.INTEGER(1),
@@ -147,7 +146,7 @@ const Payment = sequelize.define("payment", {
     }
 });
 
-const Status = sequelize.define("status", {
+const Status = sequelize.define("statuses", {
 
     id: {
         type: DataTypes.INTEGER(1),

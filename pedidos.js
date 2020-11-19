@@ -7,7 +7,8 @@ const { Orders, Order_Detail } = require("./models");
 
 async function nuevoPedido(req, res) {
 
-    let userId = req.user.existe[0].id;
+    let userId = req.user.user.id;
+    console.log(userId);
     await Orders.create({
 
         status_id: 1,
@@ -18,7 +19,7 @@ async function nuevoPedido(req, res) {
 
             req.body.details.forEach(detail => {
                 Order_Detail.create({
-                    order_id: JSON.stringify(data[0]),
+                    order_id: JSON.stringify(data.id),
                     product_id: detail.product_id,
                     product_quantity: detail.product_quantity
                 })
@@ -28,6 +29,7 @@ async function nuevoPedido(req, res) {
             res.status(200).json({ msg: "Orden creada correctamente" })
         })
         .catch(err => {
+            console.log(err);
             res.status(400).send("Error en la carga del pedido, intente en otro momento")
         });
 };
@@ -45,17 +47,18 @@ async function detallePedido(req, res) {
                         pr.prod_name,
                         od.product_quantity,
                         pr.prod_price,
-                        prod.prod_precio * od.product_quantity
-                        FROM order_detail od
+                        pr.prod_price * od.product_quantity subtotal
+                        FROM order_details od
                         JOIN products pr ON od.product_id = pr.id
-                        JOIN orders or ON or.id = od.order_id
-                        JOIN status st ON st.id = or.status_id
-                        WHERE or.id = ${req.params.id}`,
+                        JOIN orders ord ON ord.id = od.order_id
+                        JOIN statuses st ON ord.status_id = st.id
+                        WHERE ord.id = ${req.params.id}`,
                     { type: QueryTypes.SELECT })
                     .then(data => {
                         res.status(200).json(data);
                     })
                     .catch(err => {
+                        console.log(err);
                         res.status(400).send("Error al realizar la consulta, intente nuevamente");
                     })
             }
@@ -73,25 +76,25 @@ async function consultaPedidos(req, res) {
                 res.status(404).send("No existe ningun pedido en el sistema");
             } else {
                 sequelize.query(`SELECT
-                        or.id,
-                        or.order_date,
+                        ord.id,
+                        ord.order_date,
                         st.status_name,
                         pay.payment_name,
-                        pr.prod_name,
+                        p.prod_name,
                         od.product_quantity,
-                        pr.prod_price,
-                        prod.prod_precio * od.product_quantity
+                        p.prod_price,
+                        p.prod_price * od.product_quantity subtotal,
                         u.fullname,
                         u.user,
                         u.address,
                         u.phone,
                         u.email
-                        FROM orders or
-                        JOIN order_detail od ON or.id = od.order_id
+                        FROM orders ord
+                        JOIN order_details od ON ord.id = od.order_id
                         JOIN products p ON od.product_id = p.id
-                        JOIN users u ON u.id = or.user_id
-                        JOIN payment pay ON pay.id = or.payment_id
-                        JOIN status st ON st.id = or.status_id   
+                        JOIN users u ON u.id = ord.user_id
+                        JOIN payments pay ON pay.id = ord.payment_id
+                        JOIN statuses st ON st.id = ord.status_id   
                         `,
                     { type: QueryTypes.SELECT })
                     .then(data => {
@@ -121,7 +124,7 @@ async function modificarPedido(req, res) {
                 res.status(404).send("No existe ningun pedido");
             } else {
                 Orders.update({
-                    status_id: req.body.status
+                    status_id: req.body.status_id
                 }, {
                     where: {
                         id: idCaso
